@@ -15,7 +15,7 @@ services:
     networks:
       - backend
 
-  postgres:
+  data_base:
     image: postgres:alpine
     deploy:
       resourses:
@@ -33,11 +33,10 @@ services:
       interval: 1m30s
       timeout: 30s
       retries: 5
-      start_period: 30s
-	
+      start_period: 30s	
   app_django:
     depends_on:
-      - postgres
+      - data_base
       
     image: docker_compose_prod:1.0 
     build:
@@ -47,6 +46,3 @@ services:
       - 5000:5000
     networks:
       - backend
-  	
-
-
